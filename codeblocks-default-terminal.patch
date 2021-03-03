@@ -1,0 +1,11 @@
+--- a/src/sdk/globals.cpp
++++ b/src/sdk/globals.cpp
+@@ -57,7 +57,7 @@
+ const wxString DEFAULT_ARRAY_SEP     = _T(";");
+ 
+ #ifndef __WXMAC__
+-const wxString DEFAULT_CONSOLE_TERM  = _T("xterm -T $TITLE -e");
++const wxString DEFAULT_CONSOLE_TERM  = _T("termite -t $TITLE -e \"");
+ #else
+ const wxString DEFAULT_CONSOLE_TERM  = _T("osascript -e 'tell app \"Terminal\"' -e 'activate' -e 'do script quoted form of \"$SCRIPT\"' -e 'end tell'");
+ #endif
