@@ -32,6 +32,10 @@
     "modules": [
         {
             "name": "codeblocks",
+            "config-opts": [
+                "--with-boost-libdir=/app/lib",
+                "--with-contrib-plugins=all,-FileManager,-dragscroll"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -82,6 +86,27 @@
                             "url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5.1/wxWidgets-3.0.5.1.tar.bz2",
                             "sha256": "440f6e73cf5afb2cbf9af10cec8da6cdd3d3998d527598a53db87099524ac807"
                         }
+                    ]
+                },
+                {
+                    "name": "boost",
+                    "buildsystem": "simple",
+                    "build-commands": [
+                      "./bootstrap.sh",
+                      "./b2 variant=release debug-symbols=on --prefix=${FLATPAK_DEST} install"
+                    ],
+                    "sources": [
+                      {
+                        "type": "archive",
+                        "url": "https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.bz2",
+                        "sha256": "953db31e016db7bb207f11432bef7df100516eeb746843fa0486a222e3fd49cb"
+                      }
+                    ],
+                    "cleanup": [
+                        "/bin",
+                        "/include",
+                        "/lib/cmake",
+                        "/share"
                     ]
                 }
             ]
