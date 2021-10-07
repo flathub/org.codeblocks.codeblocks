@@ -27,6 +27,8 @@ cleanup:
   - '*.la'
 modules:
   - name: codeblocks
+    build-options:
+      cxxflags: -std=gnu++14
     config-opts:
       - --with-boost-libdir=/app/lib
       - --with-contrib-plugins=all,-FileManager,-dragscroll
