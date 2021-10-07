@@ -1,47 +1,17 @@
 {
     "name": "termite",
-    "no-autogen": true,
-    "make-install-args": [
-        "PREFIX=/app"
-    ],
+    "buildsystem": "meson",
     "sources": [
         {
-            "type": "git",
-            "url": "https://github.com/thestinger/termite.git",
-            "tag": "v15",
-            "commit": "4aa842245f7abb9328bf37d48f814c7b749e8516"
-        },
-        {
-            "type": "shell",
-            "commands": [
-                "sed 's#etc/xdg#share#' -i Makefile"
-            ]
-        }
-    ],
-    "modules": [
-        {
-            "name": "vte-ng",
-            "config-opts": [
-                "--enable-static",
-                "--disable-shared",
-                "enable_introspection=no",
-                "enable_vala=no",
-                "--disable-gtk-doc",
-                "--disable-glade-catalogue"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/thestinger/vte-ng/archive/0.56.2.a.tar.gz",
-                    "sha256": "28162f4318cb51a74070dbcc57b6900f7a1de2616cab843a2431fd5cb67fccb3"
-                }
-            ],
-            "cleanup": [
-                "*"
-            ],
-            "modules": [
-                "../shared-modules/intltool/intltool-0.51.json"
-            ]
+            "type": "archive",
+            "url": "https://github.com/aperezdc/termite/releases/download/v16.1/termite-16.1.tar.xz",
+            "sha256": "16feb97ace7d5777675fa2c6cae6c9f4a1feb49d59a80b293fc81e369e8b3a6d",
+            "x-checker-data": {
+                "type": "anitya",
+                "project-id": 11226,
+                "stable-only": true,
+                "url-template": "https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz"
+            }
         }
     ]
 }
