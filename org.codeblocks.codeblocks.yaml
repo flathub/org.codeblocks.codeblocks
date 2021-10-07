@@ -1,0 +1,108 @@
+app-id: org.codeblocks.codeblocks
+runtime: org.freedesktop.Sdk
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+rename-appdata-file: codeblocks.appdata.xml
+rename-desktop-file: codeblocks.desktop
+rename-icon: codeblocks
+command: codeblocks
+finish-args:
+  - --allow=devel
+  - --device=dri
+  - '--env=TERMINFO_DIRS=/app/share/terminfo:'
+  - --filesystem=home
+  - --filesystem=host
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=session-bus
+  - --socket=ssh-auth
+  - --socket=system-bus
+  - --socket=wayland
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/doc
+  - /share/man
+  - '*.a'
+modules:
+  - name: codeblocks
+    config-opts:
+      - --with-boost-libdir=/app/lib
+      - --with-contrib-plugins=all,-FileManager,-dragscroll
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
+        sha256: 15eeb3e28aea054e1f38b0c7f4671b4d4d1116fd05f63c07aa95a91db89eaac5
+      - type: patch
+        path: codeblocks-icon-name-for-mimetype.patch
+      - type: patch
+        path: codeblocks-appdata-fields.patch
+      - type: patch
+        path: codeblocks-default-terminal.patch
+      - type: shell
+        commands:
+          - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
+          - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
+            src/plugins/contrib/appdata/Makefile.{am,in}
+      - type: file
+        path: codeblocks-128.png
+    post-install:
+      - mv /app/share/mime/packages/{,org.codeblocks.}codeblocks.xml
+      - mv /app/share/icons/hicolor/48x48/mimetypes/{,org.codeblocks.codeblocks-}application-x-codeblocks.png
+      - mv /app/share/icons/hicolor/48x48/mimetypes/{,org.codeblocks.codeblocks-}application-x-codeblocks-workspace.png
+      - install -Dm644 codeblocks-128.png /app/share/icons/hicolor/128x128/apps/codeblocks.png
+    modules:
+      - name: wxWidgets
+        cleanup:
+          - /bin
+          - /lib/wx
+          - /share/bakefile
+        sources:
+          - type: archive
+            url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5.1/wxWidgets-3.0.5.1.tar.bz2
+            sha256: 440f6e73cf5afb2cbf9af10cec8da6cdd3d3998d527598a53db87099524ac807
+      - name: boost
+        buildsystem: simple
+        build-commands:
+          - ./bootstrap.sh
+          - ./b2 variant=release debug-symbols=on --prefix=${FLATPAK_DEST} install
+        sources:
+          - type: archive
+            url: https://dl.bintray.com/boostorg/release/1.75.0/source/boost_1_75_0.tar.bz2
+            sha256: 953db31e016db7bb207f11432bef7df100516eeb746843fa0486a222e3fd49cb
+        cleanup:
+          - /bin
+          - /include
+          - /lib/cmake
+          - /share
+  - name: termite
+    no-autogen: true
+    make-install-args:
+      - PREFIX=/app
+    sources:
+      - type: git
+        url: https://github.com/thestinger/termite.git
+        tag: v15
+        commit: 4aa842245f7abb9328bf37d48f814c7b749e8516
+      - type: shell
+        commands:
+          - sed 's#etc/xdg#share#' -i Makefile
+    modules:
+      - name: vte-ng
+        config-opts:
+          - --enable-static
+          - --disable-shared
+          - enable_introspection=no
+          - enable_vala=no
+          - --disable-gtk-doc
+          - --disable-glade-catalogue
+        sources:
+          - type: archive
+            url: https://github.com/thestinger/vte-ng/archive/0.56.2.a.tar.gz
+            sha256: 28162f4318cb51a74070dbcc57b6900f7a1de2616cab843a2431fd5cb67fccb3
+        cleanup:
+          - '*'
+        modules:
+          - shared-modules/intltool/intltool-0.51.json
