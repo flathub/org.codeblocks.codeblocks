@@ -1,0 +1,47 @@
+{
+    "name": "termite",
+    "no-autogen": true,
+    "make-install-args": [
+        "PREFIX=/app"
+    ],
+    "sources": [
+        {
+            "type": "git",
+            "url": "https://github.com/thestinger/termite.git",
+            "tag": "v15",
+            "commit": "4aa842245f7abb9328bf37d48f814c7b749e8516"
+        },
+        {
+            "type": "shell",
+            "commands": [
+                "sed 's#etc/xdg#share#' -i Makefile"
+            ]
+        }
+    ],
+    "modules": [
+        {
+            "name": "vte-ng",
+            "config-opts": [
+                "--enable-static",
+                "--disable-shared",
+                "enable_introspection=no",
+                "enable_vala=no",
+                "--disable-gtk-doc",
+                "--disable-glade-catalogue"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://github.com/thestinger/vte-ng/archive/0.56.2.a.tar.gz",
+                    "sha256": "28162f4318cb51a74070dbcc57b6900f7a1de2616cab843a2431fd5cb67fccb3"
+                }
+            ],
+            "cleanup": [
+                "*"
+            ],
+            "modules": [
+                "../shared-modules/intltool/intltool-0.51.json"
+            ]
+        }
+    ]
+}
