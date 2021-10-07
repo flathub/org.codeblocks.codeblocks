@@ -1,0 +1,17 @@
+{
+    "name": "termite",
+    "buildsystem": "meson",
+    "sources": [
+        {
+            "type": "archive",
+            "url": "https://github.com/aperezdc/termite/releases/download/v16.1/termite-16.1.tar.xz",
+            "sha256": "16feb97ace7d5777675fa2c6cae6c9f4a1feb49d59a80b293fc81e369e8b3a6d",
+            "x-checker-data": {
+                "type": "anitya",
+                "project-id": 11226,
+                "stable-only": true,
+                "url-template": "https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz"
+            }
+        }
+    ]
+}
