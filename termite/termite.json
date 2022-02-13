@@ -4,8 +4,8 @@
     "sources": [
         {
             "type": "archive",
-            "url": "https://github.com/aperezdc/termite/releases/download/v16.2/termite-16.2.tar.xz",
-            "sha256": "dc0daccbb9a9b6d89d7197a4a178283dabe1bb4ef7f89b67715289448ae05e7e",
+            "url": "https://github.com/aperezdc/termite/releases/download/v16.3/termite-16.3.tar.xz",
+            "sha256": "307a6b0f0f959ba97d6a3689eaa1f97d9863d63e64aade59df72e8e8fccd8689",
             "x-checker-data": {
                 "type": "anitya",
                 "project-id": 11226,
