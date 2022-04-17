@@ -1,5 +1,5 @@
 {
-    "name": "wxWidgets",
+    "name": "wxwidgets",
     "sources": [
         {
             "type": "archive",

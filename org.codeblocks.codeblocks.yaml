@@ -65,5 +65,5 @@ modules:
         path: codeblocks-128.png
     modules:
       - boost/boost.json
-      - wxWidgets/wxWidgets.json
+      - wxwidgets/wxwidgets.json
   - termite/termite.json
