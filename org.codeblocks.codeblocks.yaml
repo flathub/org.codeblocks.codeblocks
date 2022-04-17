@@ -1,6 +1,6 @@
 app-id: org.codeblocks.codeblocks
 runtime: org.gnome.Sdk
-runtime-version: '41'
+runtime-version: '42'
 sdk: org.gnome.Sdk
 rename-appdata-file: codeblocks.appdata.xml
 rename-desktop-file: codeblocks.desktop
