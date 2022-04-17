@@ -10,11 +10,12 @@ finish-args:
   - --allow=devel
   - --device=dri
   - '--env=TERMINFO_DIRS=/app/share/terminfo:'
+  # wxMenu scrolling is broken on Wayland, see #11
+  - --env=GDK_BACKEND=x11
   - --filesystem=home
   - --filesystem=host
   - --share=ipc
   - --share=network
-  - --socket=fallback-x11
   - --socket=session-bus
   - --socket=ssh-auth
   - --socket=system-bus
