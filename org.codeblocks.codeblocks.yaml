@@ -33,6 +33,11 @@ modules:
     config-opts:
       - --with-boost-libdir=/app/lib
       - --with-contrib-plugins=all,-FileManager,-dragscroll
+    post-install:
+      - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks-workspace.png
+      - install -Dm644 codeblocks-128.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/codeblocks.png
     sources:
       - type: archive
         url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
@@ -56,11 +61,6 @@ modules:
             src/plugins/contrib/appdata/Makefile.{am,in}
       - type: file
         path: codeblocks-128.png
-    post-install:
-      - mv /app/share/mime/packages/{,org.codeblocks.}codeblocks.xml
-      - mv /app/share/icons/hicolor/48x48/mimetypes/{,org.codeblocks.codeblocks-}application-x-codeblocks.png
-      - mv /app/share/icons/hicolor/48x48/mimetypes/{,org.codeblocks.codeblocks-}application-x-codeblocks-workspace.png
-      - install -Dm644 codeblocks-128.png /app/share/icons/hicolor/128x128/apps/codeblocks.png
     modules:
       - boost/boost.json
       - wxWidgets/wxWidgets.json
