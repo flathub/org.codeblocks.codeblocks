@@ -34,6 +34,8 @@ modules:
       - --with-boost-libdir=/app/lib
       - --with-contrib-plugins=all,-FileManager,-dragscroll
     post-install:
+      # don't link to upstream bug tracker as the application is not endorsed by its developer
+      - sed -i '/url type="bugtracker"/d' ${FLATPAK_DEST}/share/metainfo/codeblocks.appdata.xml
       - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
       - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks.png
       - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks-workspace.png
