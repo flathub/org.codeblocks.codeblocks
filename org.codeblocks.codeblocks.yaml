@@ -27,8 +27,6 @@ build-options:
   prepend-ld-library-path: /usr/lib/sdk/wxwidgets/lib
   prepend-pkg-config-path: /usr/lib/sdk/wxwidgets/lib/pkgconfig
 cleanup:
-  - /share/doc
-  - /share/man
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
