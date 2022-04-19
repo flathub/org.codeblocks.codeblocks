@@ -1,7 +1,9 @@
 app-id: org.codeblocks.codeblocks
-runtime: org.gnome.Sdk
-runtime-version: '42'
-sdk: org.gnome.Sdk
+runtime: org.freedesktop.Sdk
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.wxwidgets
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
 command: codeblocks
@@ -20,6 +22,10 @@ finish-args:
   - --socket=system-bus
   - --socket=wayland
   - --socket=x11
+build-options:
+  prepend-path: /usr/lib/sdk/wxwidgets/bin
+  prepend-ld-library-path: /usr/lib/sdk/wxwidgets/lib
+  prepend-pkg-config-path: /usr/lib/sdk/wxwidgets/lib/pkgconfig
 cleanup:
   - /share/doc
   - /share/man
@@ -68,7 +74,10 @@ modules:
     modules:
       # boost system lib required for NassiShneiderman contrib plugin
       - boost/boost.json
-      - wxwidgets/wxwidgets.json
+      - name: wxwidgets
+        buildsystem: simple
+        build-commands:
+          - /usr/lib/sdk/wxwidgets/install-wxwidgets.sh
   - termite/termite.json
   - name: ide-flatpak-wrapper
     buildsystem: meson
