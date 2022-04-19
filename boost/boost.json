@@ -3,7 +3,7 @@
     "buildsystem": "simple",
     "build-commands": [
         "./bootstrap.sh",
-        "./b2 variant=release debug-symbols=on --prefix=${FLATPAK_DEST} install"
+        "./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared --prefix=${FLATPAK_DEST} install"
     ],
     "sources": [
         {
@@ -19,9 +19,7 @@
         }
     ],
     "cleanup": [
-        "/bin",
         "/include",
-        "/lib/cmake",
-        "/share"
+        "/lib/cmake"
     ]
 }

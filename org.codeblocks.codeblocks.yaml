@@ -64,6 +64,7 @@ modules:
       - type: file
         path: codeblocks-128.png
     modules:
+      # boost system lib required for NassiShneiderman contrib plugin
       - boost/boost.json
       - wxwidgets/wxwidgets.json
   - termite/termite.json
