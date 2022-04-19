@@ -21,8 +21,6 @@ finish-args:
   - --socket=wayland
   - --socket=x11
 cleanup:
-  - /share/doc
-  - /share/man
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
