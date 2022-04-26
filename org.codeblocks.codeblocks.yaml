@@ -57,6 +57,8 @@ modules:
         path: codeblocks-appdata-fields.patch
       - type: patch
         path: codeblocks-default-terminal.patch
+      - type: patch
+        path: codeblocks-open-txt-files-in-builtin-editor.patch
       - type: shell
         commands:
           - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
