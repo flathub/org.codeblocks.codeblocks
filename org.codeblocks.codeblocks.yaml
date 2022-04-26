@@ -34,6 +34,7 @@ modules:
       - --with-boost-libdir=/app/lib
       - --with-contrib-plugins=all,-FileManager,-dragscroll
     post-install:
+      - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       # don't link to upstream bug tracker as the application is not endorsed by its developer
       - sed -i '/url type="bugtracker"/d' ${FLATPAK_DEST}/share/metainfo/codeblocks.appdata.xml
       - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
@@ -68,3 +69,15 @@ modules:
       - boost/boost.json
       - wxwidgets/wxwidgets.json
   - termite/termite.json
+  - name: ide-flatpak-wrapper
+    buildsystem: meson
+    config-opts:
+      - -Deditor_binary=/app/bin/codeblocks-bin
+      - -Deditor_title=Code::Blocks IDE
+      - -Dprogram_name=codeblocks
+      - -Dsdk_version=21.08
+    sources:
+      - type: git
+        url: https://github.com/flathub/ide-flatpak-wrapper.git
+        branch: master
+        commit: bb8f638d87fbd2c3c7a49c5debc8fee586709a20
