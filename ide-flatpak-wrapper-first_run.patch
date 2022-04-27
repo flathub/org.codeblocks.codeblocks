@@ -1,5 +1,5 @@
 diff --git a/first_run.txt b/first_run.txt
-index f8aa7a2..8bd4fc0 100644
+index f8aa7a2..8e5bdb2 100644
 --- a/first_run.txt
 +++ b/first_run.txt
 @@ -16,17 +16,8 @@ To execute commands on the host system, run inside the sandbox:
@@ -22,3 +22,24 @@ index f8aa7a2..8bd4fc0 100644
  
  This flatpak provides a standard development environment (gcc, python, etc).
  To see what's available:
+@@ -37,17 +28,17 @@ To see what's available:
+ 
+ To get support for additional languages, you have to install SDK extensions, e.g.
+ 
+-  $ flatpak install flathub org.freedesktop.Sdk.Extension.dotnet
++  $ flatpak install flathub org.freedesktop.Sdk.Extension.wxwidgets
+   $ flatpak install flathub org.freedesktop.Sdk.Extension.golang
+ 
+ To enable selected extensions, set FLATPAK_ENABLE_SDK_EXT environment variable
+ to a comma-separated list of extension names (name is ID portion after the last dot):
+ 
+-  $ FLATPAK_ENABLE_SDK_EXT=dotnet,golang flatpak run @FLATPAK_ID@
++  $ FLATPAK_ENABLE_SDK_EXT=wxwidgets,golang flatpak run @FLATPAK_ID@
+ 
+ To make this persistent, set the variable via flatpak override:
+ 
+-  $ flatpak override --user @FLATPAK_ID@ --env=FLATPAK_ENABLE_SDK_EXT="dotnet,golang"
++  $ flatpak override --user @FLATPAK_ID@ --env=FLATPAK_ENABLE_SDK_EXT="wxwidgets,golang"
+ 
+ You can use
+ 
