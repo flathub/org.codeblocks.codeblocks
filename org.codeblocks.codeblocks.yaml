@@ -2,7 +2,6 @@ app-id: org.codeblocks.codeblocks
 runtime: org.gnome.Sdk
 runtime-version: '42'
 sdk: org.gnome.Sdk
-rename-appdata-file: codeblocks.appdata.xml
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
 command: codeblocks
@@ -24,6 +23,7 @@ finish-args:
 cleanup:
   - /share/doc
   - /share/man
+  - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
 modules:
@@ -35,8 +35,7 @@ modules:
       - --with-contrib-plugins=all,-FileManager,-dragscroll
     post-install:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
-      # don't link to upstream bug tracker as the application is not endorsed by its developer
-      - sed -i '/url type="bugtracker"/d' ${FLATPAK_DEST}/share/metainfo/codeblocks.appdata.xml
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
       - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks.png
       - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks-workspace.png
@@ -51,10 +50,10 @@ modules:
           project-id: 313
           stable-only: true
           url-template: https://sourceforge.net/projects/codeblocks/files/Sources/$version/codeblocks-$version.tar.xz
+      - type: file
+        path: org.codeblocks.codeblocks.metainfo.xml
       - type: patch
         path: codeblocks-icon-name-for-mimetype.patch
-      - type: patch
-        path: codeblocks-appdata-fields.patch
       - type: patch
         path: codeblocks-default-terminal.patch
       - type: patch
