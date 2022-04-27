@@ -1,0 +1,24 @@
+diff --git a/first_run.txt b/first_run.txt
+index f8aa7a2..8bd4fc0 100644
+--- a/first_run.txt
++++ b/first_run.txt
+@@ -16,17 +16,8 @@ To execute commands on the host system, run inside the sandbox:
+   $ flatpak-spawn --host <COMMAND>
+   
+ To make the Integrated Terminal automatically use the host system's shell,
+-you can add this to the settings:
+-
+-  {
+-    "terminal.integrated.profiles.linux": {
+-      "host-bash": {
+-        "path": "/usr/bin/flatpak-spawn",
+-        "args":  ["--host", "--env=TERM=xterm-256color", "bash"]
+-      }
+-    },
+-    "terminal.integrated.defaultProfile.linux": "host-bash"
+-  }
++you can modify `Settings > Environment > General Settings > Shell to run commands in`,
++from `/bin/sh -c` to `/usr/bin/flatpak-spawn --host --env=TERM=xterm-256color /bin/bash -c`.
+ 
+ This flatpak provides a standard development environment (gcc, python, etc).
+ To see what's available:
