@@ -79,6 +79,6 @@ modules:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
         branch: master
-        commit: bb8f638d87fbd2c3c7a49c5debc8fee586709a20
+        commit: a488c7f170d06ca317daeac3c39720d0760f5ded
       - type: patch
         path: ide-flatpak-wrapper-first_run.patch
