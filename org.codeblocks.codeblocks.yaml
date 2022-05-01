@@ -2,6 +2,8 @@ app-id: org.codeblocks.codeblocks
 runtime: org.freedesktop.Sdk
 runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.wxwidgets
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
 command: codeblocks
@@ -22,7 +24,15 @@ cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
+build-options:
+  prepend-path: /usr/lib/sdk/wxwidgets/bin
+  prepend-ld-library-path: /usr/lib/sdk/wxwidgets/lib
+  prepend-pkg-config-path: /usr/lib/sdk/wxwidgets/lib/pkgconfig
 modules:
+  - name: wxwidgets
+    buildsystem: simple
+    build-commands:
+      - /usr/lib/sdk/wxwidgets/install-wxwidgets.sh
   - name: codeblocks
     build-options:
       cxxflags: -std=gnu++14
@@ -52,7 +62,8 @@ modules:
         path: codeblocks-open-txt-files-in-builtin-editor.patch
       - type: shell
         commands:
-          - ./bootstrap
+          - ./update_revision.sh
+          - autoreconf -fiv --include=/usr/lib/sdk/wxwidgets/share/aclocal
           - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
           - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
             src/plugins/contrib/appdata/Makefile.{am,in}
@@ -84,22 +95,6 @@ modules:
         cleanup:
           - /include
           - /lib/cmake
-      - name: wxwidgets
-        sources:
-          - type: archive
-            url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.0/wxWidgets-3.2.0.tar.bz2
-            sha256: 356e9b55f1ae3d58ae1fed61478e9b754d46b820913e3bfbc971c50377c1903a
-            x-checker-data:
-              type: html
-              url: https://www.wxwidgets.org/downloads
-              version-pattern: 'Latest Stable Release: ([\d\.-]+)'
-              url-template: https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
-        cleanup:
-          - /bin
-          - /include
-          - /lib/wx
-          - /share/aclocal
-          - /share/bakefile
 
   - name: termite
     buildsystem: meson
