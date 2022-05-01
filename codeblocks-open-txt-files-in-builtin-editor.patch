@@ -1,0 +1,79 @@
+From 6ee2900657c6a6ff2bfc13c7aaa6a526c916a78d Mon Sep 17 00:00:00 2001
+From: tinywrkb <tinywrkb@gmail.com>
+Date: Wed, 27 Apr 2022 01:55:28 +0300
+Subject: [PATCH] open txt files in builtin editor
+
+---
+ src/include/filefilters.h | 1 +
+ src/include/globals.h     | 1 +
+ src/sdk/filefilters.cpp   | 1 +
+ src/sdk/globals.cpp       | 3 +++
+ src/src/main.cpp          | 2 ++
+ 5 files changed, 8 insertions(+)
+
+diff --git a/src/include/filefilters.h b/src/include/filefilters.h
+index fc0b7c8..a613059 100644
+--- a/src/include/filefilters.h
++++ b/src/include/filefilters.h
+@@ -63,6 +63,7 @@ namespace FileFilters
+ 
+     // file extension constants
+     // *just* the extension, e.g. "exe"
++    extern const DLLIMPORT wxString TXT_EXT;
+     extern const DLLIMPORT wxString WORKSPACE_EXT;
+     extern const DLLIMPORT wxString CODEBLOCKS_EXT;
+     extern const DLLIMPORT wxString DEVCPP_EXT;
+diff --git a/src/include/globals.h b/src/include/globals.h
+index 566dbb6..87adb3c 100644
+--- a/src/include/globals.h
++++ b/src/include/globals.h
+@@ -74,6 +74,7 @@ enum FileType
+     ftNative,
+     ftXMLDocument,
+     ftScript,
++    ftText,
+     ftOther
+ };
+ 
+diff --git a/src/sdk/filefilters.cpp b/src/sdk/filefilters.cpp
+index ea8b793..89aef96 100644
+--- a/src/sdk/filefilters.cpp
++++ b/src/sdk/filefilters.cpp
+@@ -143,6 +143,7 @@ bool FileFilters::GetFilterNameFromIndex(const wxString& FiltersList, int Index,
+ 
+ // define some constants used throughout C::B
+ 
++const wxString FileFilters::TXT_EXT                 = _T("txt");
+ const wxString FileFilters::WORKSPACE_EXT           = _T("workspace");
+ const wxString FileFilters::CODEBLOCKS_EXT          = _T("cbp");
+ const wxString FileFilters::DEVCPP_EXT              = _T("dev");
+diff --git a/src/sdk/globals.cpp b/src/sdk/globals.cpp
+index 0c81100..35477f7 100644
+--- a/src/sdk/globals.cpp
++++ b/src/sdk/globals.cpp
+@@ -383,6 +383,9 @@ FileType FileTypeOf(const wxString& filename)
+     else if (ext.IsSameAs(FileFilters::SCRIPT_EXT))
+         return ftScript;
+ 
++    else if (ext.IsSameAs(FileFilters::TXT_EXT))
++        return ftText;
++
+     // DrewBoo: Before giving up, see if the ProjectManager
+     // considers this extension a source or header
+     // TODO (Morten#5#): Do what DrewBoo said: Try removing the above code
+diff --git a/src/src/main.cpp b/src/src/main.cpp
+index 9d6ed6a..d7185c5 100644
+--- a/src/src/main.cpp
++++ b/src/src/main.cpp
+@@ -2078,6 +2078,8 @@ bool MainFrame::OpenGeneric(const wxString& filename, bool addToHistory)
+             // fallthrough
+         case ftTemplateSource:
+             // fallthrough
++        case ftText:
++            // fallthrough
+         case ftResource:
+             return DoOpenFile(filename, addToHistory);
+         //
+-- 
+2.35.1
+

@@ -12,5 +12,12 @@
                 "url-template": "https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2"
             }
         }
+    ],
+    "cleanup": [
+        "/bin",
+        "/include",
+        "/lib/wx",
+        "/share/aclocal",
+        "/share/bakefile"
     ]
 }

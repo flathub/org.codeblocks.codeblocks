@@ -13,5 +13,13 @@
                 "url-template": "https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz"
             }
         }
+    ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/lib/systemd",
+        "/share/applications",
+        "/share/man",
+        "*.a"
     ]
 }
