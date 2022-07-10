@@ -35,6 +35,7 @@ modules:
       - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
       - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks.png
       - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks-workspace.png
+      - install -Dm644 codeblocks-64.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/codeblocks.png
       - install -Dm644 codeblocks-128.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/codeblocks.png
     sources:
       - type: svn
@@ -54,6 +55,8 @@ modules:
           - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
           - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
             src/plugins/contrib/appdata/Makefile.{am,in}
+      - type: file
+        path: codeblocks-64.png
       - type: file
         path: codeblocks-128.png
     modules:
