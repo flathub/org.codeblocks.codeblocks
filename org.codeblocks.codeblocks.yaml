@@ -35,8 +35,9 @@ modules:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/{,${FLATPAK_ID}-}application-x-codeblocks-workspace.png
+      - rm ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-codeblocks{,-workspace}.png
+      - install -Dm644 codeblocks-mime.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks.png
+      - install -Dm644 codeblocks-mime-workspace.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks-workspace.png
       - install -Dm644 codeblocks-64.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/codeblocks.png
       - install -Dm644 codeblocks-128.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/codeblocks.png
     sources:
@@ -66,6 +67,10 @@ modules:
         path: codeblocks-64.png
       - type: file
         path: codeblocks-128.png
+      - type: file
+        path: codeblocks-mime.png
+      - type: file
+        path: codeblocks-mime-workspace.png
     modules:
       - name: boost
         # boost system lib required for NassiShneiderman contrib plugin
