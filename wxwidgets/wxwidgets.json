@@ -3,12 +3,12 @@
     "sources": [
         {
             "type": "archive",
-            "url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.1.6/wxWidgets-3.1.6.tar.bz2",
-            "sha256": "4980e86c6494adcd527a41fc0a4e436777ba41d1893717d7b7176c59c2061c25",
+            "url": "https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.0/wxWidgets-3.2.0.tar.bz2",
+            "sha256": "356e9b55f1ae3d58ae1fed61478e9b754d46b820913e3bfbc971c50377c1903a",
             "x-checker-data": {
                 "type": "html",
                 "url": "https://www.wxwidgets.org/downloads",
-                "version-pattern": "Latest Development Release: ([\\d\\.-]+)",
+                "version-pattern": "Latest Stable Release: ([\\d\\.-]+)",
                 "url-template": "https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2"
             }
         }
