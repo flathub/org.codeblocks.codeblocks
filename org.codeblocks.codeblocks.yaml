@@ -39,7 +39,7 @@ modules:
     sources:
       - type: svn
         url: svn://svn.code.sf.net/p/codeblocks/code/trunk
-        revision: '12794'
+        revision: '12847'
       - type: file
         path: org.codeblocks.codeblocks.metainfo.xml
       - type: patch
