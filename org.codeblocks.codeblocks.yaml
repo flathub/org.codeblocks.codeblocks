@@ -1,6 +1,6 @@
 app-id: org.codeblocks.codeblocks
 runtime: org.freedesktop.Sdk
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
@@ -134,7 +134,7 @@ modules:
       - -Deditor_binary=/app/bin/codeblocks-bin
       - -Deditor_title=Code::Blocks IDE
       - -Dprogram_name=codeblocks
-      - -Dsdk_version=21.08
+      - -Dsdk_version=22.08
     sources:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
