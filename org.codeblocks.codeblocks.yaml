@@ -12,7 +12,6 @@ finish-args:
   # wxMenu scrolling is broken on Wayland, see #11
   - --env=GDK_BACKEND=x11
   - --filesystem=home
-  - --filesystem=host
   - --share=ipc
   - --share=network
   - --socket=session-bus
