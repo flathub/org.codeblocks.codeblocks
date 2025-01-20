@@ -24,6 +24,58 @@ cleanup:
   - '*.a'
   - '*.la'
 modules:
+  - name: boost
+    # boost system lib required for NassiShneiderman contrib plugin
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh
+      - ./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared
+      --prefix=${FLATPAK_DEST} install
+    cleanup:
+      - /include
+      - /lib/cmake
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/boost/boost/1.85.0/boost_1_85_0.tar.bz2
+        sha256: 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617
+        
+  - name: wxwidgets
+    buildsystem: autotools
+    no-autogen: true
+    config-opts:
+      - --with-gtk=3
+      - --disable-webview
+    cleanup:
+      - /bin
+      - /include
+      - /lib/wx
+      - /share/aclocal
+      - /share/bakefile
+    sources:
+      - type: git
+        url: https://github.com/wxWidgets/wxWidgets.git
+        commit: 5ff25322553c1870cf20a2e1ba6f20ed50d9fe9a
+        tag: v3.2.6
+
+  - name: termite
+    buildsystem: meson
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/systemd
+      - /share/applications
+      - /share/man
+      - '*.a'
+    sources:
+      - type: archive
+        url: https://github.com/aperezdc/termite/releases/download/v16.4/termite-16.4.tar.xz
+        sha256: e9a2105ca9310b616647cb63a0d0c8be7dbf003fd0ca68c5e4c64ed57a0b20ad
+        x-checker-data:
+          type: anitya
+          project-id: 11226
+          stable-only: true
+          url-template: https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz
+
   - name: codeblocks
     build-options:
       cxxflags: -std=gnu++14
@@ -51,11 +103,10 @@ modules:
       - type: file
         path: org.codeblocks.codeblocks.metainfo.xml
       - type: patch
-        path: codeblocks-icon-name-for-mimetype.patch
-      - type: patch
-        path: codeblocks-default-terminal.patch
-      - type: patch
-        path: codeblocks-open-txt-files-in-builtin-editor.patch
+        paths:
+          - patches/codeblocks-icon-name-for-mimetype.patch
+          - patches/codeblocks-default-terminal.patch
+          - patches/codeblocks-open-txt-files-in-builtin-editor.patch
       - type: shell
         commands:
           - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
@@ -67,58 +118,7 @@ modules:
         path: codeblocks-mime.png
       - type: file
         path: codeblocks-mime-workspace.png
-    modules:
-      - name: boost
-        # boost system lib required for NassiShneiderman contrib plugin
-        buildsystem: simple
-        build-commands:
-          - ./bootstrap.sh
-          - ./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared
-            --prefix=${FLATPAK_DEST} install
-        sources:
-          - type: archive
-            url: https://downloads.sourceforge.net/boost/boost/1.85.0/boost_1_85_0.tar.bz2
-            sha256: 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617
-        cleanup:
-          - /include
-          - /lib/cmake
-
-      - name: wxwidgets
-        sources:
-          - type: archive
-            url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5/wxWidgets-3.0.5.tar.bz2
-            sha256: 8aacd56b462f42fb6e33b4d8f5d40be5abc3d3b41348ea968aa515cc8285d813
-            x-checker-data:
-              type: html
-              url: https://www.wxwidgets.org/downloads
-              version-pattern: 'Latest Stable Release: ([\d\.-]+)'
-              url-template: https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
-        cleanup:
-          - /bin
-          - /include
-          - /lib/wx
-          - /share/aclocal
-          - /share/bakefile
-
-  - name: termite
-    buildsystem: meson
-    sources:
-      - type: archive
-        url: https://github.com/aperezdc/termite/releases/download/v16.4/termite-16.4.tar.xz
-        sha256: e9a2105ca9310b616647cb63a0d0c8be7dbf003fd0ca68c5e4c64ed57a0b20ad
-        x-checker-data:
-          type: anitya
-          project-id: 11226
-          stable-only: true
-          url-template: https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/systemd
-      - /share/applications
-      - /share/man
-      - '*.a'
-
+        
   - name: ide-flatpak-wrapper
     buildsystem: meson
     config-opts:
@@ -137,4 +137,4 @@ modules:
           version-query: .[].sha[0:8]
           timestamp-query: .[].commit.committer.date
       - type: patch
-        path: ide-flatpak-wrapper-first_run.patch
+        path: patches/ide-flatpak-wrapper-first_run.patch
