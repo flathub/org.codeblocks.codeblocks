@@ -29,8 +29,7 @@ modules:
     buildsystem: simple
     build-commands:
       - ./bootstrap.sh
-      - ./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared
-      --prefix=${FLATPAK_DEST} install
+      - ./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared --prefix=${FLATPAK_DEST} install
     cleanup:
       - /include
       - /lib/cmake
