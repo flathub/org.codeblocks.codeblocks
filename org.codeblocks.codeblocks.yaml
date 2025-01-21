@@ -85,10 +85,10 @@ modules:
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
       - rm ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-codeblocks{,-workspace}.png
-      - rm /app/share/icons/hicolor/64x64/apps/org.codeblocks.codeblocks.png
       - install -Dm644 codeblocks-mime.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks.png
       - install -Dm644 codeblocks-mime-workspace.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks-workspace.png
       - install -Dm644 codeblocks-160.png ${FLATPAK_DEST}/share/icons/hicolor/160x160/apps/codeblocks.png
+      - rm /app/share/icons/hicolor/64x64/apps/org.codeblocks.codeblocks.png
     sources:
       - type: archive
         url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
@@ -124,7 +124,7 @@ modules:
       - -Deditor_binary=/app/bin/codeblocks-bin
       - -Deditor_title=Code::Blocks IDE
       - -Dprogram_name=codeblocks
-      - -Dsdk_version=22.08
+      - -Dsdk_version=24.08
     sources:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
