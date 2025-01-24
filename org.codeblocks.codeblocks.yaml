@@ -1,6 +1,6 @@
 app-id: org.codeblocks.codeblocks
 runtime: org.freedesktop.Sdk
-runtime-version: '22.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
@@ -8,10 +8,8 @@ command: codeblocks
 finish-args:
   - --allow=devel
   - --device=dri
-  - '--env=TERMINFO_DIRS=/app/share/terminfo:'
   # wxMenu scrolling is broken on Wayland, see #11
   - --env=GDK_BACKEND=x11
-  - --filesystem=home
   - --filesystem=host
   - --share=ipc
   - --share=network
@@ -19,12 +17,62 @@ finish-args:
   - --socket=ssh-auth
   - --socket=system-bus
   - --socket=wayland
-  - --socket=x11
+  - --socket=fallback-x11
 cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
 modules:
+  - name: boost
+    # boost system lib required for NassiShneiderman contrib plugin
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh
+      - ./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared --prefix=${FLATPAK_DEST} install
+    cleanup:
+      - /include
+      - /lib/cmake
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/boost/boost/1.85.0/boost_1_85_0.tar.bz2
+        sha256: 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617
+        
+  - name: wxwidgets
+    buildsystem: autotools
+    no-autogen: true
+    config-opts:
+      - --with-gtk=3
+      - --disable-webview
+    cleanup:
+      - /bin
+      - /include
+      - /lib/wx
+      - /share/aclocal
+      - /share/bakefile
+    sources:
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5/wxWidgets-3.0.5.tar.bz2
+        sha256: 8aacd56b462f42fb6e33b4d8f5d40be5abc3d3b41348ea968aa515cc8285d813
+
+  - name: termite
+    buildsystem: meson
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/systemd
+      - /share/applications
+      - /share/man
+      - '*.a'
+    sources:
+      - type: archive
+        url: https://github.com/aperezdc/termite/releases/download/v16.4/termite-16.4.tar.xz
+        sha256: e9a2105ca9310b616647cb63a0d0c8be7dbf003fd0ca68c5e4c64ed57a0b20ad
+        x-checker-data:
+          type: anitya
+          project-id: 11226
+          stable-only: true
+          url-template: https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz
+
   - name: codeblocks
     build-options:
       cxxflags: -std=gnu++14
@@ -38,8 +86,8 @@ modules:
       - rm ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-codeblocks{,-workspace}.png
       - install -Dm644 codeblocks-mime.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks.png
       - install -Dm644 codeblocks-mime-workspace.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks-workspace.png
-      - install -Dm644 codeblocks-64.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/codeblocks.png
-      - install -Dm644 codeblocks-128.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/codeblocks.png
+      - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
+      - rm -r /app/share/icons/hicolor/64x64
     sources:
       - type: archive
         url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
@@ -53,97 +101,32 @@ modules:
       - type: file
         path: org.codeblocks.codeblocks.metainfo.xml
       - type: patch
-        path: codeblocks-icon-name-for-mimetype.patch
-      - type: patch
-        path: codeblocks-default-terminal.patch
-      - type: patch
-        path: codeblocks-open-txt-files-in-builtin-editor.patch
+        paths:
+          - patches/codeblocks-icon-name-for-mimetype.patch
+          - patches/codeblocks-default-terminal.patch
+          - patches/codeblocks-open-txt-files-in-builtin-editor.patch
       - type: shell
         commands:
           - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
           - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
             src/plugins/contrib/appdata/Makefile.{am,in}
       - type: file
-        path: codeblocks-64.png
-      - type: file
-        path: codeblocks-128.png
+        path: codeblocks-256.png
       - type: file
         path: codeblocks-mime.png
       - type: file
         path: codeblocks-mime-workspace.png
-    modules:
-      - name: boost
-        # boost system lib required for NassiShneiderman contrib plugin
-        buildsystem: simple
-        build-commands:
-          - ./bootstrap.sh
-          - ./b2 --with-system variant=release link=shared debug-symbols=off runtime-link=shared
-            --prefix=${FLATPAK_DEST} install
-        sources:
-          - type: archive
-            url: https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.bz2
-            sha256: 475d589d51a7f8b3ba2ba4eda022b170e562ca3b760ee922c146b6c65856ef39
-            x-checker-data:
-              type: anitya
-              project-id: 6845
-              stable-only: true
-              url-template: https://boostorg.jfrog.io/artifactory/main/release/$major.$minor.$patch/source/boost_${major}_${minor}_$patch.tar.bz2
-        cleanup:
-          - /include
-          - /lib/cmake
-
-      - name: wxwidgets
-        sources:
-          - type: archive
-            url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5/wxWidgets-3.0.5.tar.bz2
-            sha256: 8aacd56b462f42fb6e33b4d8f5d40be5abc3d3b41348ea968aa515cc8285d813
-            x-checker-data:
-              type: html
-              url: https://www.wxwidgets.org/downloads
-              version-pattern: 'Latest Stable Release: ([\d\.-]+)'
-              url-template: https://github.com/wxWidgets/wxWidgets/releases/download/v$version/wxWidgets-$version.tar.bz2
-        cleanup:
-          - /bin
-          - /include
-          - /lib/wx
-          - /share/aclocal
-          - /share/bakefile
-
-  - name: termite
-    buildsystem: meson
-    sources:
-      - type: archive
-        url: https://github.com/aperezdc/termite/releases/download/v16.4/termite-16.4.tar.xz
-        sha256: e9a2105ca9310b616647cb63a0d0c8be7dbf003fd0ca68c5e4c64ed57a0b20ad
-        x-checker-data:
-          type: anitya
-          project-id: 11226
-          stable-only: true
-          url-template: https://github.com/aperezdc/termite/releases/download/v$version/termite-$version.tar.xz
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/systemd
-      - /share/applications
-      - /share/man
-      - '*.a'
-
+        
   - name: ide-flatpak-wrapper
     buildsystem: meson
     config-opts:
       - -Deditor_binary=/app/bin/codeblocks-bin
       - -Deditor_title=Code::Blocks IDE
       - -Dprogram_name=codeblocks
-      - -Dsdk_version=22.08
+      - -Dsdk_version=24.08
     sources:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
         commit: a488c7f170d06ca317daeac3c39720d0760f5ded
-        x-checker-data:
-          type: json
-          url: https://api.github.com/repos/flathub/ide-flatpak-wrapper/commits?sha=master&per_page=1
-          commit-query: .[].sha
-          version-query: .[].sha[0:8]
-          timestamp-query: .[].commit.committer.date
       - type: patch
-        path: ide-flatpak-wrapper-first_run.patch
+        path: patches/ide-flatpak-wrapper-first_run.patch
