@@ -10,14 +10,13 @@ finish-args:
   - --device=dri
   # wxMenu scrolling is broken on Wayland, see #11
   - --env=GDK_BACKEND=x11
-  - --filesystem=host
+  - --filesystem=home
   - --share=ipc
   - --share=network
   - --socket=session-bus
   - --socket=ssh-auth
   - --socket=system-bus
-  - --socket=wayland
-  - --socket=fallback-x11
+  - --socket=x11
 cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
