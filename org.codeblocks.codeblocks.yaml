@@ -21,7 +21,18 @@ cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
+  org.codeblocks.codeblocks.Plugin:
+    versions: stable;test;master
+    directory: plugins
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+    add-ld-path: lib
 modules:
+  - name: devTools
+    buildsystem: simple
+    build-commands:
+      - install -d /app/plugins
   - name: boost
     # boost system lib required for NassiShneiderman contrib plugin
     buildsystem: simple
