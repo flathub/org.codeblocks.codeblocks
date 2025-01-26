@@ -27,3 +27,40 @@ This flatpak provides a standard development environment (gcc, python, etc).
   $ flatpak override --user org.codeblocks.codeblocks --env=FLATPAK_ENABLE_SDK_EXT="dotnet,golang"
   ```
 * You can use `$ flatpak search <TEXT>` to find others.
+
+***
+The Code::Blocks plugin contains:
+- sfml2
+- sfml3
+- wxWidgets3
+- raylib5
+- fltk1
+
+They are installed in /app/plugins/devtools/ with the structure:
+```
+├── bin
+├── include
+│   ├── FL
+│   ├── GL
+│   ├── GLFW
+│   ├── SFML
+│   │   ├── Audio
+│   │   ├── Graphics
+│   │   ├── Network
+│   │   ├── System
+│   │   └── Window
+│   └── SFML2
+│       └── SFML
+├── lib
+│   └── SFML2
+│       ├── cmake
+│       └── pkgconfig
+├── lib64
+│   ├── cmake
+│   │   ├── glfw3
+│   │   ├── raylib
+│   │   └── SFML
+│   └── pkgconfig
+
+```
+
