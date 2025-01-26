@@ -10,6 +10,9 @@ finish-args:
   - --device=dri
   # wxMenu scrolling is broken on Wayland, see #11
   - --env=GDK_BACKEND=x11
+  - --env=PATH=/usr/bin:/app/bin:/app/plugins/devtools/bin
+  - --env=C_INCLUDE_PATH=/app/plugins/devtools/include
+  - --env=CPLUS_INCLUDE_PATH=/app/plugins/devtools/include
   - --filesystem=home
   - --share=ipc
   - --share=network
