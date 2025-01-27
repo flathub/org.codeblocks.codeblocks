@@ -103,12 +103,7 @@ modules:
     post-install:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
-      - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
-      - rm ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-codeblocks{,-workspace}.png
-      - install -Dm644 codeblocks-mime.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks.png
-      - install -Dm644 codeblocks-mime-workspace.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks-workspace.png
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
-      - rm -r /app/share/icons/hicolor/64x64
     sources:
       - type: svn
         url: svn://svn.code.sf.net/p/codeblocks/code/trunk
@@ -117,10 +112,6 @@ modules:
         path: codeblocks-256.png
       - type: file
         path: org.codeblocks.codeblocks.metainfo.xml
-      - type: file
-        path: codeblocks-mime.png
-      - type: file
-        path: codeblocks-mime-workspace.png
         
   - name: ide-flatpak-wrapper
     buildsystem: meson
