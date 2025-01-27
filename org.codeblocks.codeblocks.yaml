@@ -81,6 +81,19 @@ modules:
         url: https://github.com/aperezdc/termite/releases/download/v16.9/termite-16.9.tar.xz
         sha256: 95486a0330dfcaa68dca3a26afc95b2711c1bef8187503be54d04e1ee8458bd6
 
+  - name: cppcheck
+    buildsystem: cmake-ninja
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/applications
+      - /share/man
+      - '*.a'
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.16/cppcheck-2.16.0.tar.gz
+        sha256: f1a97c8cef5ee9d0abb57e9244549d4fe18d4ecac80cf82e250d1fc5f38b1501
+
   - name: codeblocks
     build-options:
       cxxflags: -std=gnu++14
