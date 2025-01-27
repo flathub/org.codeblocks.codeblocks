@@ -116,6 +116,8 @@ modules:
       - type: file
         path: codeblocks-256.png
       - type: file
+        path: org.codeblocks.codeblocks.metainfo.xml
+      - type: file
         path: codeblocks-mime.png
       - type: file
         path: codeblocks-mime-workspace.png
