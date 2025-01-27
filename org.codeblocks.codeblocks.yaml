@@ -114,19 +114,6 @@ modules:
         url: svn://svn.code.sf.net/p/codeblocks/code/trunk
         revision: '13605'
       - type: file
-        path: org.codeblocks.codeblocks.metainfo.xml
-      - type: patch
-        paths:
-          - patches/codeblocks-icon-name-for-mimetype.patch
-          - patches/codeblocks-default-terminal.patch
-          - patches/codeblocks-open-txt-files-in-builtin-editor.patch
-      - type: shell
-        commands:
-          - ./bootstrap
-          - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
-          - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
-            src/plugins/contrib/appdata/Makefile.{am,in}
-      - type: file
         path: codeblocks-256.png
       - type: file
         path: codeblocks-mime.png
