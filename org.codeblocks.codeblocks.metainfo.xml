@@ -23,9 +23,10 @@
   </screenshots>
   <update_contact>jens_at_codeblocks.org</update_contact>
   <developer_name>The Code::Blocks team</developer_name>
-  <url type="homepage">https://www.codeblocks.org/</url>
-  <url type="help">https://codeblocks.org/user-manual</url>
+  <url type="homepage">https://codeblocks.org/</url>
+  <url type="help">https://codeblocks.org/user-manual/</url>
   <url type="bugtracker">https://github.com/flathub/org.codeblocks.codeblocks/issues</url>
+  <launchable type="desktop-id">codeblocks.desktop</launchable>
   <releases>
     <release date="2020-03-19" version="20.03"/>
     <release date="2017-12-30" version="17.12"/>
