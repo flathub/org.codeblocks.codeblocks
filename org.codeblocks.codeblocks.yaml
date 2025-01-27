@@ -10,6 +10,9 @@ finish-args:
   - --device=dri
   # wxMenu scrolling is broken on Wayland, see #11
   - --env=GDK_BACKEND=x11
+  - --env=PATH=/usr/bin:/app/bin:/app/plugins/devtools/bin
+  - --env=C_INCLUDE_PATH=/app/plugins/devtools/include
+  - --env=CPLUS_INCLUDE_PATH=/app/plugins/devtools/include
   - --filesystem=home
   - --share=ipc
   - --share=network
@@ -21,7 +24,18 @@ cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
+org.codeblocks.codeblocks.Plugin:
+  versions: stable;test;master
+  directory: plugins
+  subdirectories: true
+  no-autodownload: true
+  autodelete: true
+  add-ld-path: lib
 modules:
+  - name: devTools
+    buildsystem: simple
+    build-commands:
+      - install -d /app/plugins
   - name: boost
     # boost system lib required for NassiShneiderman contrib plugin
     buildsystem: simple
