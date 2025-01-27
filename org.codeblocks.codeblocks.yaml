@@ -122,6 +122,7 @@ modules:
           - patches/codeblocks-open-txt-files-in-builtin-editor.patch
       - type: shell
         commands:
+          - ./bootstrap
           - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
           - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
             src/plugins/contrib/appdata/Makefile.{am,in}
@@ -143,5 +144,11 @@ modules:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
         commit: a488c7f170d06ca317daeac3c39720d0760f5ded
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/flathub/ide-flatpak-wrapper/commits?sha=master&per_page=1
+          commit-query: .[].sha
+          version-query: .[].sha[0:8]
+          timestamp-query: .[].commit.committer.date
       - type: patch
         path: patches/ide-flatpak-wrapper-first_run.patch
