@@ -97,7 +97,6 @@ modules:
 
   - name: codeblocks
     build-system: autotools
-    subdir: release-25.01
     build-options:
       cxxflags: -std=gnu++14
     config-opts:
