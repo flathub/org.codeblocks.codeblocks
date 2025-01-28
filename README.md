@@ -28,8 +28,9 @@ This flatpak provides a standard development environment (gcc, python, etc).
   ```
 * You can use `$ flatpak search <TEXT>` to find others.
 
-***
-The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools contains:
+The Code::Blocks plugin
+--
+The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools, contains:
 - sfml2
 - sfml3
 - wxWidgets3
