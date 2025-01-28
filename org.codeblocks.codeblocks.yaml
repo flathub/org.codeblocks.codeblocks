@@ -109,7 +109,7 @@ modules:
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
     sources:
       - type: svn
-        url: svn://svn.code.sf.net/p/codeblocks/code/branches
+        url: svn://svn.code.sf.net/p/codeblocks/code/trunk
         revision: '13605'
       - type: file
         path: codeblocks-256.png
