@@ -25,7 +25,7 @@ cleanup:
   - '*.a'
   - '*.la'
 org.codeblocks.codeblocks.Plugin:
-  versions: stable;test;master
+  versions: stable;test;master;beta
   directory: plugins
   subdirectories: true
   no-autodownload: true
@@ -106,8 +106,8 @@ modules:
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
     sources:
       - type: svn
-        url: svn://svn.code.sf.net/p/codeblocks/code/trunk
-        revision: '13605'
+        url: https://svn.code.sf.net/p/codeblocks/code/branches/release-25.01
+        revision: '13600'
       - type: file
         path: codeblocks-256.png
       - type: file
