@@ -111,6 +111,7 @@ modules:
       - install -Dm644 codeblocks-mime-workspace.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks-workspace.png
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
       - rm -r /app/share/icons/hicolor/64x64
+      - desktop-file-edit --set-key=Keywords --set-value='C++;C;SDL;wxWidgets;Fltk;Raylib;SFML;Fortran' /app/share/applications/codeblocks.desktop
     sources:
       - type: archive
         url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
