@@ -18,7 +18,10 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://web.archive.org/web/20190105130957if_/http://www.codeblocks.org/images/stories/imagebrowser/scr1.png</image>
+      <image>https://bztd.github.io/Flathub/C::B/def.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://bztd.github.io/Flathub/C::B/raylib.png</image>
     </screenshot>
   </screenshots>
   <update_contact>jens_at_codeblocks.org</update_contact>
