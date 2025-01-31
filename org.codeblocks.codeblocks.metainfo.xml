@@ -21,9 +21,11 @@
   <screenshots>
     <screenshot type="default">
       <image>https://bztd.github.io/Flathub/C::B/def.png</image>
+      <caption>Editor's view</caption>
     </screenshot>
     <screenshot>
       <image>https://bztd.github.io/Flathub/C::B/raylib.png</image>
+      <caption>Using Raylib provided by the plugin</caption>
     </screenshot>
   </screenshots>
   <update_contact>jens_at_codeblocks.org</update_contact>
@@ -33,9 +35,7 @@
   <url type="bugtracker">https://github.com/flathub/org.codeblocks.codeblocks/issues</url>
   <launchable type="desktop-id">codeblocks.desktop</launchable>
   <releases>
-    <release date="2020-03-19" version="20.03"/>
-    <release date="2017-12-30" version="17.12"/>
-    <release date="2016-01-28" version="16.01"/>
+    <release date="2025-01-01" version="Development-Version"/>
   </releases>
   <content_rating type="oars-1.1"/>
 </component>
