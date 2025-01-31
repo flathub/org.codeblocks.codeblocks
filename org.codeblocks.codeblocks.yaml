@@ -102,6 +102,7 @@ modules:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
+      - desktop-file-edit --set-key=Keywords --set-value="IDE;C++;C;SDL;Fortran;SFML;wxWidgets;Raylib;FLTK;" /app/share/applications/codeblocks.desktop
     sources:
       - type: svn
         url: https://svn.code.sf.net/p/codeblocks/code/branches/release-25.01
