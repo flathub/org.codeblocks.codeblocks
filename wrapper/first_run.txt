@@ -1,3 +1,5 @@
+/app/share/ide-flatpak-wrapper/first_run.txt
+
 ------------------------------------------------------------------------------------
 | Warning: You are running an unofficial Flatpak version of Code::Blocks IDE !!! |
 ------------------------------------------------------------------------------------
