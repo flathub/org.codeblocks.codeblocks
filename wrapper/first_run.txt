@@ -1,12 +1,12 @@
-
-https://www.flathub.org
-
 ------------------------------------------------------------------------------------
 | Warning: You are running an unofficial Flatpak version of Code::Blocks IDE !!! |
 ------------------------------------------------------------------------------------
-
 Please open issues under: https://github.com/flathub/org.codeblocks.codeblocks/issues
+For updated information visit: https://github.com/flathub/org.codeblocks.codeblocks/blob/master/README.md
 
+
+WORKING WITH THE SDK AND ITS EXTENSIONS
+--------------------------------------------------------------
 
 This version is running inside a container and is therefore not able
 to access SDKs on your host system!
@@ -37,3 +37,45 @@ You can use
   $ flatpak search <TEXT>
 
 to find others.
+
+
+WORKING WITH THE SDK AND ITS EXTENSIONS
+--------------------------------------------------------------
+
+The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools, contains:
+- sfml2
+- sfml3
+- wxWidgets3
+- raylib5
+- fltk1
+
+They are installed in /app/plugins/devtools/ with the structure:
+
+├── bin
+├── include
+│   ├── FL
+│   ├── GL
+│   ├── GLFW
+│   ├── SFML3
+|   |   └── SFML
+│   └── SFML2
+│       └── SFML
+├── lib
+│   ├── SFML3
+│   |   ├── cmake
+│   |   └── pkgconfig
+|   └── SFML2
+        ├── cmake
+        └── pkgconfig
+
+For example, to configure a project with SFML3 you must indicate the use of headers and libraries,
+in Proyect-> Build Options-> Search directories, having created a project for SFML2.
+* /app/plugins/devtools/include/SFML3 (Add to Compiler)
+* /app/plugins/devtools/lib/SFML3 (Add to Linker)
+
+For SFML2,
+* /app/plugins/devtools/include/SFML2 (Add to Compiler)
+* /app/plugins/devtools/lib/SFML2 (Add to Linker)
+
+
+
