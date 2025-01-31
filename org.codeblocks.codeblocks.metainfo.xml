@@ -7,13 +7,15 @@
   <summary>IDE for C, C++ and Fortran</summary>
   <description>
     <p>
-     Code::Blocks is a highly extensible Integrated Development Environment (IDE) for the C, C++ and Fortran programming languages. It features support for a wide range of compilers, parallel builds, multi-target projects, and also provides an interface with GNU GDB.
+     Code::Blocks is a highly extensible Integrated Development Environment (IDE) 
+     for the C, C++ and Fortran programming languages. It features support for 
+     a wide range of compilers, parallel builds, multi-target projects, and also 
+     provides an interface with GNU GDB.
     </p>
     <p>
-    The code editor in Code::Blocks features: syntax highlighting, code folding, a tabbed interface, code completion, a class browser and smart indenting.
-    </p>
-    <p>
-    This is an unofficial Flatpak version of Code::Blocks that is not endorsed nor supported by its developer. Issues should be reported through linked bug tracker.
+     Note: Code::Blocks runs in an isolated space from the main system, it has the 
+     tools provided by the SDK and its extensions, it also has a plugin that can
+     be installed to add more dependencies.
     </p>
   </description>
   <screenshots>
