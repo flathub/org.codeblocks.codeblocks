@@ -14,7 +14,6 @@ finish-args:
   - --env=C_INCLUDE_PATH=/app/plugins/devtools/include
   - --env=CPLUS_INCLUDE_PATH=/app/plugins/devtools/include
   - --filesystem=home
-  - --filesystem=~/.themes:ro
   - --share=ipc
   - --share=network
   - --socket=session-bus
@@ -25,15 +24,13 @@ cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
-add-extensions:
-  org.codeblocks.codeblocks.Plugin:
-    versions: stable;test;master
-    directory: plugins
-    subdirectories: true
-    no-autodownload: true
-    autodelete: true
-    add-ld-path: lib
-    
+org.codeblocks.codeblocks.Plugin:
+  versions: stable;test;master;beta
+  directory: plugins
+  subdirectories: true
+  no-autodownload: true
+  autodelete: true
+  add-ld-path: lib
 modules:
   - name: devTools
     buildsystem: simple
@@ -67,8 +64,8 @@ modules:
       - /share/bakefile
     sources:
       - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.5/wxWidgets-3.0.5.tar.bz2
-        sha256: 8aacd56b462f42fb6e33b4d8f5d40be5abc3d3b41348ea968aa515cc8285d813
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxWidgets-3.2.6.tar.bz2
+        sha256: 939e5b77ddc5b6092d1d7d29491fe67010a2433cf9b9c0d841ee4d04acb9dce7
 
   - name: termite
     buildsystem: meson
@@ -106,41 +103,15 @@ modules:
     post-install:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
-      - mv ${FLATPAK_DEST}/share/mime/packages/{,org.codeblocks.}codeblocks.xml
-      - rm ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-codeblocks{,-workspace}.png
-      - install -Dm644 codeblocks-mime.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks.png
-      - install -Dm644 codeblocks-mime-workspace.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/${FLATPAK_ID}-application-x-codeblocks-workspace.png
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
-      - rm -r /app/share/icons/hicolor/64x64
-      - desktop-file-edit --set-key=Keywords --set-value='C++;C;SDL;wxWidgets;Fltk;Raylib;SFML;Fortran' /app/share/applications/codeblocks.desktop
     sources:
-      - type: archive
-        url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
-        sha256: 15eeb3e28aea054e1f38b0c7f4671b4d4d1116fd05f63c07aa95a91db89eaac5
-        x-checker-data:
-          is-main-source: true
-          type: anitya
-          project-id: 313
-          stable-only: true
-          url-template: https://sourceforge.net/projects/codeblocks/files/Sources/$version/codeblocks-$version.tar.xz
-      - type: file
-        path: org.codeblocks.codeblocks.metainfo.xml
-      - type: patch
-        paths:
-          - patches/codeblocks-icon-name-for-mimetype.patch
-          - patches/codeblocks-default-terminal.patch
-          - patches/codeblocks-open-txt-files-in-builtin-editor.patch
-      - type: shell
-        commands:
-          - sed -i 's|$(datadir)/pixmaps|$(datadir)/icons/hicolor/64x64/apps|' src/mime/Makefile.{am,in}
-          - sed -i 's|$(datarootdir)/appdata|$(datarootdir)/metainfo|' Makefile.{am,in}
-            src/plugins/contrib/appdata/Makefile.{am,in}
+      - type: svn
+        url: https://svn.code.sf.net/p/codeblocks/code/branches/release-25.01
+        revision: '13600'
       - type: file
         path: codeblocks-256.png
       - type: file
-        path: codeblocks-mime.png
-      - type: file
-        path: codeblocks-mime-workspace.png
+        path: org.codeblocks.codeblocks.metainfo.xml
         
   - name: ide-flatpak-wrapper
     buildsystem: meson
