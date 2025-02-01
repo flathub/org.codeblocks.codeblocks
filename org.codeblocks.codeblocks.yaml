@@ -12,7 +12,6 @@ finish-args:
   - --env=C_INCLUDE_PATH=/app/plugins/devtools/include
   - --env=CPLUS_INCLUDE_PATH=/app/plugins/devtools/include
   - --filesystem=home
-  - --filesystem=~/.themes:ro
   - --share=ipc
   - --share=network
   - --socket=session-bus
@@ -24,7 +23,7 @@ cleanup:
   - '*.a'
   - '*.la'
 org.codeblocks.codeblocks.Plugin:
-  versions: stable;test;master;beta
+  versions: stable;test;master;
   directory: plugins
   subdirectories: true
   no-autodownload: true
@@ -106,7 +105,7 @@ modules:
       - desktop-file-edit --set-key=Keywords --set-value="IDE;C++;C;SDL;Fortran;SFML;wxWidgets;Raylib;FLTK;" /app/share/applications/codeblocks.desktop
     sources:
       - type: svn
-        url: https://svn.code.sf.net/p/codeblocks/code/trunk
+        url: https://svn.code.sf.net/p/codeblocks/code/branches/release-20.03
         revision: '13607'
       - type: file
         path: codeblocks-256.png
