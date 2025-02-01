@@ -49,7 +49,7 @@ WORKING WITH THE SDK AND ITS EXTENSIONS
 The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools, contains:
 - sfml2
 - sfml3
-- wxWidgets3
+- wxWidgets3.2
 - raylib5
 - fltk1
 
@@ -89,4 +89,8 @@ If you want to install version 20.03 of Code::Blocks you must install the curren
 
 sudo flatpak update --commit=5e9b0df4e7c901558d22c8c28cd51177fa7d486d9c88bab64d8691d0345ebeaf org.codeblocks.codeblocks//stable
 
+
+Adjust Theme
+--------------------------------------------------------------
+If you want Code::Blocks to match the system theme, the set theme must be located in the ~/themes path.
 */
