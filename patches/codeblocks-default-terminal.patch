@@ -1,11 +1,11 @@
---- a/src/sdk/globals.cpp 2025-01-31 16:59:49.928084612 -0500
-+++ b/src/sdk/globals.cpp 2025-01-31 19:51:25.972451276 -0500
-@@ -61,7 +61,7 @@
- const wxString DEFAULT_CONSOLE_TERM  = _T("osascript -e 'tell app \"Terminal\"' -e 'activate' -e 'do script \"$SCRIPT\"' -e 'end tell'");
- const wxString DEFAULT_CONSOLE_SHELL = _T("/bin/zsh -c");
- #else
+--- a/src/sdk/globals.cpp
++++ b/src/sdk/globals.cpp
+@@ -57,7 +57,7 @@
+ const wxString DEFAULT_ARRAY_SEP     = _T(";");
+ 
+ #ifndef __WXMAC__
 -const wxString DEFAULT_CONSOLE_TERM  = _T("xterm -T $TITLE -e");
 +const wxString DEFAULT_CONSOLE_TERM  = _T("termite -t $TITLE -e \"");
- const wxString DEFAULT_CONSOLE_SHELL = _T("/bin/sh -c");
+ #else
+ const wxString DEFAULT_CONSOLE_TERM  = _T("osascript -e 'tell app \"Terminal\"' -e 'activate' -e 'do script quoted form of \"$SCRIPT\"' -e 'end tell'");
  #endif
- 
