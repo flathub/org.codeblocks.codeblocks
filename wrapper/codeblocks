@@ -133,10 +133,10 @@ export FLATPAK_IDE_ENV=1
 if [ ! -f "${FIRST_RUN}" ]; then
   touch "${FIRST_RUN}"
   touch "${SDK_UPDATE}"
-  exec_vscode "$@" "/app/share/ide-flatpak-wrapper/first_run.txt"
+  exec_vscode "$@" "/app/share/ide-flatpak-wrapper/first_run.h"
 elif [ ! -f "${SDK_UPDATE}" ]; then
   touch "${SDK_UPDATE}"
-  exec_vscode "$@" "/app/share/ide-flatpak-wrapper/sdk_update.txt"
+  exec_vscode "$@" "/app/share/ide-flatpak-wrapper/sdk_update.h"
 else
   exec_vscode "$@"
 fi
