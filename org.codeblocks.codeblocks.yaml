@@ -104,9 +104,9 @@ modules:
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
       - desktop-file-edit --set-key=Keywords --set-value="IDE;C++;C;SDL;Fortran;SFML;wxWidgets;Raylib;FLTK;" /app/share/applications/codeblocks.desktop
     sources:
-      - type: svn
-        url: https://svn.code.sf.net/p/codeblocks/code/branches/release-20.03
-        revision: '12176'
+      - type: archive
+        url: https://sourceforge.net/projects/codeblocks/files/Sources/20.03/codeblocks-20.03.tar.xz
+        sha256: 15eeb3e28aea054e1f38b0c7f4671b4d4d1116fd05f63c07aa95a91db89eaac5
       - type: file
         path: codeblocks-256.png
       - type: file
