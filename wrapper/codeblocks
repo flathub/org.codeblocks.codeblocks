@@ -4,7 +4,7 @@
 set -e
 shopt -s nullglob
 
-FIRST_RUN="${XDG_CONFIG_HOME}/flatpak-vscode-first-run"
+FIRST_RUN="${XDG_CONFIG_HOME}/flatpak-codeblocks-first-run"
 SDK_UPDATE="${XDG_CONFIG_HOME}/flatpak-vscode-sdk-update-24.08"
 FLATPAK_IDE_LOGLEVEL="${FLATPAK_IDE_LOGLEVEL:-1}"
 
