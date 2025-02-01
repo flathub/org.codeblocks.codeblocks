@@ -71,6 +71,6 @@ ROLLBACK TO VERSION 20.03
 --
 If you want to install version 20.03 of Code::Blocks you must install the current version and then run,
 ```
-sudo flatpak update --commit=c4acaffa458c18abe234a3a8f918269dd97dcaa1cb12a8fa773d7d692f314b5e org.codeblocks.codeblocks
+sudo flatpak update --commit=5e9b0df4e7c901558d22c8c28cd51177fa7d486d9c88bab64d8691d0345ebeaf org.codeblocks.codeblocks
 ```
 
