@@ -111,6 +111,8 @@ modules:
         path: codeblocks-256.png
       - type: file
         path: org.codeblocks.codeblocks.metainfo.xml
+      - type: patch
+        path: patches/codeblocks-default-terminal.patch
         
   - name: wrapper
     buildsystem: simple
