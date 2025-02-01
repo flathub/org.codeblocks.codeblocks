@@ -105,8 +105,8 @@ modules:
       - desktop-file-edit --set-key=Keywords --set-value="IDE;C++;C;SDL;Fortran;SFML;wxWidgets;Raylib;FLTK;" /app/share/applications/codeblocks.desktop
     sources:
       - type: svn
-        url: https://svn.code.sf.net/p/codeblocks/code/branches/release-25.01
-        revision: '13600'
+        url: https://svn.code.sf.net/p/codeblocks/code/trunk
+        revision: '13607'
       - type: file
         path: codeblocks-256.png
       - type: file
