@@ -76,7 +76,6 @@ sudo flatpak update --commit=5e9b0df4e7c901558d22c8c28cd51177fa7d486d9c88bab64d8
 
 Adjust Theme
 --
-Si deseas que Code::Blocks se acople al tema del sistema, el tema establecido debe de encontrarse
-en la ruta "~/themes".
+If you want Code::Blocks to match the system theme, the set theme must be located in the ~/themes path
 
 
