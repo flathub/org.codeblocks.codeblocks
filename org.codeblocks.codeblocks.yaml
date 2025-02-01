@@ -121,9 +121,9 @@ modules:
       - install -Dm644 sdk_update.h -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
       - install -Dm755 codeblocks -t ${FLATPAK_DEST}/bin
     sources:
-      - type: archive
+      - type: file
         path: wrapper/codeblocks
-      - type: archive
+      - type: file
         path: wrapper/first_run.h
-      - type: archive
+      - type: file
         path: wrapper/sdk_update.h
