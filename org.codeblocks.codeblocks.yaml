@@ -117,13 +117,13 @@ modules:
   - name: wrapper
     buildsystem: simple
     build-commands:
-      - install -Dm644 first_run.txt -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
-      - install -Dm644 sdk_update.txt -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
+      - install -Dm644 first_run.h -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
+      - install -Dm644 sdk_update.h -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
       - install -Dm755 codeblocks -t ${FLATPAK_DEST}/bin
     sources:
       - type: archive
         path: wrapper/codeblocks
       - type: archive
-        path: wrapper/first_run.txt
+        path: wrapper/first_run.h
       - type: archive
-        path: wrapper/sdk_update.txt
+        path: wrapper/sdk_update.h
