@@ -15,7 +15,8 @@
     <p>
      Note: Code::Blocks runs in an isolated space from the main system, it has the 
      tools provided by the SDK and its extensions, it also has a plugin that can
-     be installed to add more dependencies.
+     be installed to add more dependencies. More information at 
+     https://github.com/flathub/org.codeblocks.codeblocks.
     </p>
   </description>
   <screenshots>
