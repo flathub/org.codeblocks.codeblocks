@@ -76,6 +76,10 @@ sudo flatpak update --commit=5e9b0df4e7c901558d22c8c28cd51177fa7d486d9c88bab64d8
 
 Adjust Theme
 --
-If you want Code::Blocks to match the system theme, the set theme must be located in the ~/themes path
+If you want Code::Blocks to match the system theme, the theme you configure must be located in the
+path ~/themes or ~/.local/share/themes/ or wherever your system stores user themes, and you must 
+grant Code::Blocks permissions to access them. You also need to add this path to the XDG_DATA_DIRS 
+environment variable passed to the package.
 
+All these operations can be performed with Flatseal using the flatpak command.
 
