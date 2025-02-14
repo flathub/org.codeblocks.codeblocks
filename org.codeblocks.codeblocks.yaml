@@ -12,7 +12,6 @@ finish-args:
   - --env=C_INCLUDE_PATH=/app/plugins/devtools/include
   - --env=CPLUS_INCLUDE_PATH=/app/plugins/devtools/include
   - --filesystem=home
-  - --filesystem=~/.local/share/themes:ro
   - --share=ipc
   - --share=network
   - --socket=session-bus
