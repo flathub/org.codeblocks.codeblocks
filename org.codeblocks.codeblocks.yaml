@@ -22,13 +22,15 @@ cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
-org.codeblocks.codeblocks.Plugin:
-  versions: stable;test;master;beta
-  directory: plugins
-  subdirectories: true
-  no-autodownload: true
-  autodelete: true
-  add-ld-path: lib
+add-extensions:
+  org.codeblocks.codeblocks.Plugin:
+    versions: stable;test;master;beta
+    directory: plugins
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+    add-ld-path: lib
+    
 modules:
   - name: devTools
     buildsystem: simple
