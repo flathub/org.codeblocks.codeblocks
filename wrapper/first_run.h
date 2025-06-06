@@ -3,7 +3,6 @@
 ------------------------------------------------------------------------------------
 | Warning: You are running an unofficial Flatpak version of Code::Blocks IDE !!! |
 ------------------------------------------------------------------------------------
-Note: THIS IS A DEVELOPMENT VERSION, ERRORS MAY BE FOUND, IN THE TESTS CARRIED OUT THE PROGRAM HAS WORKED PROPERLY.
 Please open issues under: https://github.com/flathub/org.codeblocks.codeblocks/issues
 For updated information visit: https://github.com/flathub/org.codeblocks.codeblocks/blob/master/README.md
 
@@ -96,4 +95,4 @@ path ~/themes or ~/.local/share/themes/ or wherever your system stores user them
 grant Code::Blocks permissions to access them. You also need to add this path to the XDG_DATA_DIRS 
 environment variable passed to the package.
 
-All these operations can be performed with Flatseal using the flatpak command.
+All these operations can be performed with Flatseal.
