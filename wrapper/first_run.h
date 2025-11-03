@@ -78,21 +78,3 @@ in Proyect-> Build Options-> Search directories, having created a project for SF
 For SFML2,
 * /app/plugins/devtools/include/SFML2 (Add to Compiler)
 * /app/plugins/devtools/lib/SFML2 (Add to Linker)
-
-
-ROLLBACK TO VERSION 20.03
---------------------------------------------------------------
-
-If you want to install version 20.03 of Code::Blocks you must install the current version and then run,
-
-sudo flatpak update --commit=5e9b0df4e7c901558d22c8c28cd51177fa7d486d9c88bab64d8691d0345ebeaf org.codeblocks.codeblocks//stable
-
-
-Adjust Theme
---------------------------------------------------------------
-If you want Code::Blocks to match the system theme, the theme you configure must be located in the 
-path ~/themes or ~/.local/share/themes/ or wherever your system stores user themes, and you must 
-grant Code::Blocks permissions to access them. You also need to add this path to the XDG_DATA_DIRS 
-environment variable passed to the package.
-
-All these operations can be performed with Flatseal.
