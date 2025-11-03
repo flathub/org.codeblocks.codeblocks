@@ -1,6 +1,6 @@
 app-id: org.codeblocks.codeblocks
 runtime: org.freedesktop.Sdk
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
@@ -116,15 +116,19 @@ modules:
       - type: patch
         path: patches/codeblocks-default-terminal.patch
         
-  - name: wrapper
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 first_run.h -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
-      - install -Dm644 sdk_update.h -t ${FLATPAK_DEST}/share/ide-flatpak-wrapper
-      - install -Dm755 codeblocks -t ${FLATPAK_DEST}/bin
+  - name: ide-flatpak-wrapper
+    buildsystem: meson
+    config-opts:
+      - -Deditor_binary=/app/bin/codeblocks-bin
+      - -Deditor_title=codeblocks
+      - -Dprogram_name=codeblocks
+      - -Dfirst_run_template=first_run.h
+      - -Dsdk_update_template=sdk_update.h
+      - -Dsdk_version=25.08
     sources:
-      - type: file
-        path: wrapper/codeblocks
+      - type: git
+        url: https://github.com/flathub/ide-flatpak-wrapper.git
+        commit: d581fd9b873acbf6fb22899aa388435f6c00f61a
       - type: file
         path: wrapper/first_run.h
       - type: file
