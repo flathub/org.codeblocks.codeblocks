@@ -64,8 +64,8 @@ modules:
       - /share/bakefile
     sources:
       - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxWidgets-3.2.6.tar.bz2
-        sha256: 939e5b77ddc5b6092d1d7d29491fe67010a2433cf9b9c0d841ee4d04acb9dce7
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.3.2/wxWidgets-3.3.2.tar.bz2
+        sha256: 50a28cb668de47b0e006cd6ebed8cf4f76c1cac6116fb3c978c44478219103f2
 
   - name: termite
     buildsystem: meson
