@@ -99,7 +99,7 @@ modules:
       cxxflags: -std=gnu++14
     config-opts:
       - --with-boost-libdir=/app/lib
-      - --with-contrib-plugins=all,-FileManager,-dragscroll
+      - --with-contrib-plugins=all
     post-install:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
