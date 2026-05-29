@@ -91,15 +91,15 @@ modules:
       - '*.a'
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.16/cppcheck-2.16.0.tar.gz
-        sha256: f1a97c8cef5ee9d0abb57e9244549d4fe18d4ecac80cf82e250d1fc5f38b1501
+        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.20/cppcheck-2.20.0.tar.gz
+        sha256: 7be7992439339017edb551d8e7d2315f9bb57c402da50c2cee9cd0e2724600a1
 
   - name: codeblocks
     build-options:
       cxxflags: -std=gnu++14
     config-opts:
       - --with-boost-libdir=/app/lib
-      - --with-contrib-plugins=all,-FileManager,-dragscroll
+      - --with-contrib-plugins=all
     post-install:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
