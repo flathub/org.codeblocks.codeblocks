@@ -1,6 +1,6 @@
 app-id: org.codeblocks.codeblocks
 runtime: org.freedesktop.Sdk
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 rename-desktop-file: codeblocks.desktop
 rename-icon: codeblocks
@@ -8,8 +8,6 @@ command: codeblocks
 finish-args:
   - --allow=devel
   - --device=dri
-  # wxMenu scrolling is broken on Wayland, see #11
-  - --env=GDK_BACKEND=x11
   - --env=PATH=/usr/bin:/app/bin:/app/plugins/devtools/bin
   - --env=C_INCLUDE_PATH=/app/plugins/devtools/include
   - --env=CPLUS_INCLUDE_PATH=/app/plugins/devtools/include
@@ -24,13 +22,15 @@ cleanup:
   - /share/metainfo/codeblocks.appdata.xml
   - '*.a'
   - '*.la'
-org.codeblocks.codeblocks.Plugin:
-  versions: stable;test;master;beta
-  directory: plugins
-  subdirectories: true
-  no-autodownload: true
-  autodelete: true
-  add-ld-path: lib
+add-extensions:
+  org.codeblocks.codeblocks.Plugin:
+    versions: stable;test;master;beta
+    directory: plugins
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+    add-ld-path: lib
+    
 modules:
   - name: devTools
     buildsystem: simple
@@ -47,8 +47,8 @@ modules:
       - /lib/cmake
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/boost/boost/1.85.0/boost_1_85_0.tar.bz2
-        sha256: 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617
+        url: https://downloads.sourceforge.net/boost/boost/1.88.0/boost_1_88_0.tar.bz2
+        sha256: 46d9d2c06637b219270877c9e16155cbd015b6dc84349af064c088e9b5b12f7b
         
   - name: wxwidgets
     buildsystem: autotools
@@ -91,38 +91,45 @@ modules:
       - '*.a'
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.16/cppcheck-2.16.0.tar.gz
-        sha256: f1a97c8cef5ee9d0abb57e9244549d4fe18d4ecac80cf82e250d1fc5f38b1501
+        url: https://sourceforge.net/projects/cppcheck/files/cppcheck/2.20/cppcheck-2.20.0.tar.gz
+        sha256: 7be7992439339017edb551d8e7d2315f9bb57c402da50c2cee9cd0e2724600a1
 
   - name: codeblocks
     build-options:
       cxxflags: -std=gnu++14
     config-opts:
       - --with-boost-libdir=/app/lib
-      - --with-contrib-plugins=all,-FileManager,-dragscroll
+      - --with-contrib-plugins=all
     post-install:
       - mv ${FLATPAK_DEST}/bin/codeblocks{,-bin}
       - install -Dm644 ${FLATPAK_ID}.metainfo.xml -t ${FLATPAK_DEST}/share/metainfo/
       - install -Dm644 codeblocks-256.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/codeblocks.png
+      - desktop-file-edit --set-key=Keywords --set-value="IDE;C++;C;SDL;Fortran;SFML;wxWidgets;Raylib;FLTK;" /app/share/applications/codeblocks.desktop
     sources:
       - type: svn
-        url: https://svn.code.sf.net/p/codeblocks/code/branches/release-25.01
-        revision: '13600'
+        url:  https://svn.code.sf.net/p/codeblocks/code/branches/release-25.03
+        revision: '13647'
       - type: file
         path: codeblocks-256.png
       - type: file
         path: org.codeblocks.codeblocks.metainfo.xml
+      - type: patch
+        path: patches/codeblocks-default-terminal.patch
         
   - name: ide-flatpak-wrapper
     buildsystem: meson
     config-opts:
       - -Deditor_binary=/app/bin/codeblocks-bin
-      - -Deditor_title=Code::Blocks IDE
+      - -Deditor_title=codeblocks
       - -Dprogram_name=codeblocks
-      - -Dsdk_version=24.08
+      - -Dfirst_run_template=first_run.h
+      - -Dsdk_update_template=sdk_update.h
+      - -Dsdk_version=25.08
     sources:
       - type: git
         url: https://github.com/flathub/ide-flatpak-wrapper.git
-        commit: a488c7f170d06ca317daeac3c39720d0760f5ded
-      - type: patch
-        path: patches/ide-flatpak-wrapper-first_run.patch
+        commit: d581fd9b873acbf6fb22899aa388435f6c00f61a
+      - type: file
+        path: wrapper/first_run.h
+      - type: file
+        path: wrapper/sdk_update.h
