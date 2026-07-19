@@ -63,9 +63,10 @@ modules:
       - /share/aclocal
       - /share/bakefile
     sources:
-      - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxWidgets-3.2.6.tar.bz2
-        sha256: 939e5b77ddc5b6092d1d7d29491fe67010a2433cf9b9c0d841ee4d04acb9dce7
+      - type: git
+        url: https://github.com/wxWidgets/wxWidgets.git
+        commit: 670835aec7e54b9e9d5a50d6a1aea1e8ba0bcdb2
+        tag: v3.3.3
 
   - name: termite
     buildsystem: meson
