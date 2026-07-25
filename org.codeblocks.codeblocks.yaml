@@ -109,7 +109,7 @@ modules:
     sources:
       - type: svn
         url:  https://svn.code.sf.net/p/codeblocks/code/branches/release-25.03
-        revision: '13916'
+        revision: '13923'
       - type: file
         path: codeblocks-256.png
       - type: file
