@@ -96,8 +96,8 @@ modules:
         sha256: 7be7992439339017edb551d8e7d2315f9bb57c402da50c2cee9cd0e2724600a1
 
   - name: codeblocks
-    build-options:
-      cxxflags: -std=gnu++14
+    # build-options:
+      # cxxflags: -std=gnu++14
     config-opts:
       - --with-boost-libdir=/app/lib
       - --with-contrib-plugins=all
