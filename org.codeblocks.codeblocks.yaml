@@ -63,9 +63,10 @@ modules:
       - /share/aclocal
       - /share/bakefile
     sources:
-      - type: archive
-        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxWidgets-3.2.6.tar.bz2
-        sha256: 939e5b77ddc5b6092d1d7d29491fe67010a2433cf9b9c0d841ee4d04acb9dce7
+      - type: git
+        url: https://github.com/wxWidgets/wxWidgets.git
+        commit: 670835aec7e54b9e9d5a50d6a1aea1e8ba0bcdb2
+        tag: v3.3.3
 
   - name: termite
     buildsystem: meson
@@ -95,8 +96,8 @@ modules:
         sha256: 7be7992439339017edb551d8e7d2315f9bb57c402da50c2cee9cd0e2724600a1
 
   - name: codeblocks
-    build-options:
-      cxxflags: -std=gnu++14
+    # build-options:
+      # cxxflags: -std=gnu++14
     config-opts:
       - --with-boost-libdir=/app/lib
       - --with-contrib-plugins=all
@@ -107,8 +108,8 @@ modules:
       - desktop-file-edit --set-key=Keywords --set-value="IDE;C++;C;SDL;Fortran;SFML;wxWidgets;Raylib;FLTK;" /app/share/applications/codeblocks.desktop
     sources:
       - type: svn
-        url:  https://svn.code.sf.net/p/codeblocks/code/branches/release-25.03
-        revision: '13647'
+        url:  https://svn.code.sf.net/p/codeblocks/code/trunk
+        revision: '13923'
       - type: file
         path: codeblocks-256.png
       - type: file
