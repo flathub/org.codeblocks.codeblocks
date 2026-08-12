@@ -109,7 +109,7 @@ modules:
     sources:
       - type: svn
         url:  https://svn.code.sf.net/p/codeblocks/code/trunk
-        revision: '13923'
+        revision: '13949'
       - type: file
         path: codeblocks-256.png
       - type: file
