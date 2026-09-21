@@ -47,7 +47,7 @@ Using the Code::Blocks plugin
 The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools, adds development tools, contains:
 - sfml2
 - sfml3
-- wxWidgets3.2
+- wxWidgets3.3
 - raylib5
 - fltk1
 
