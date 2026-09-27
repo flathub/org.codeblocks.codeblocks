@@ -7,9 +7,9 @@ Please open issues under: https://github.com/flathub/org.codeblocks.codeblocks/i
 For updated information visit: https://github.com/flathub/org.codeblocks.codeblocks/blob/master/README.md
 
 
+--------------------------------------------------------------------------
 WORKING WITH THE SDK AND ITS EXTENSIONS
---------------------------------------------------------------
-
+--------------------------------------------------------------------------
 This version is running inside a container and is therefore not able
 to access SDKs on your host system!
 
@@ -41,9 +41,9 @@ You can use
 to find others.
 
 
+--------------------------------------------------------------------------
 Using the Code::Blocks plugin
---------------------------------------------------------------
-
+--------------------------------------------------------------------------
 The Code::Blocks plugin org.codeblocks.codeblocks.Plugin.devtools, adds development tools, contains:
 - sfml2
 - sfml3
@@ -78,3 +78,14 @@ in Proyect-> Build Options-> Search directories, having created a project for SF
 For SFML2,
 * /app/plugins/devtools/include/SFML2 (Add to Compiler)
 * /app/plugins/devtools/lib/SFML2 (Add to Linker)
+
+
+--------------------------------------------------------------------------
+What can I do if the library or tool my project needs is not available?
+--------------------------------------------------------------------------
+Unfortunately, if it is not found among the previously mentioned resources, the only
+option is to manually build that resource within the isolated environment using the 
+SDK tools and configure the container's environment variables. It is also possible to  
+build a custom extension named `org.codeblocks.codeblocks.Plugin.devuser`, which should 
+mount automatically when Codeblocks starts (though even in this case, configuring 
+environment variables will likely still be necessary).
