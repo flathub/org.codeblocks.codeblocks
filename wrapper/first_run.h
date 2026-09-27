@@ -86,6 +86,6 @@ What can I do if the library or tool my project needs is not available?
 Unfortunately, if it is not found among the previously mentioned resources, the only
 option is to manually build that resource within the isolated environment using the 
 SDK tools and configure the container's environment variables. It is also possible to  
-build a custom extension named `org.codeblocks.codeblocks.Plugin.devuser`, which should 
+build a custom extension named `org.codeblocks.codeblocks.Plugin.NAME`, which should 
 mount automatically when Codeblocks starts (though even in this case, configuring 
 environment variables will likely still be necessary).
